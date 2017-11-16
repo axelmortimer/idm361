@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>History - Deep Work</title>
+  <!-- META -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width, maximum-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <!-- CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Lato|Yanone+Kaffeesatz" rel="stylesheet">
+  <link rel="stylesheet" href="css-normalize.css">
+  <link rel="stylesheet" href="css-main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <!-- PAGE CONTENT -->
+  <div class="historyNav">
+    <button type="button" name="return_btn" id="return_btn" onclick="jmp2LocalPage('index.html')">X</button>
+    <h3 class="historyNavDaily">DAILY</h3>
+    <h3 class="historyNavWeekly">WEEKLY</h3>
+  </div>
+  <div class="historyWrapper">
+    <div class="dailyEntryContainer">
+      <div class="tableHeading">
+        <h4>DATE</h4>
+        <h4>TIME</h4>
+        <h4>START</h4>
+        <h4>END</h4>
+        <h4>X</h4>
+      </div>
+      <div class="tableEntry">
+        <h4>11/15</h4>
+        <h4>1:06</h4>
+        <h4>2:30PM</h4>
+        <h4>3:36PM</h4>
+        <h4 class="historyDelete">X</h4>
+      </div>
+    </div>
+    <div class="weeklyEntryContainer">
+      <div class="tableHeading">
+        <h4>WEEK</h4>
+        <h4>TIME</h4>
+        <h4>START</h4>
+        <h4>END</h4>
+        <h4>X</h4>
+      </div>
+      <div class="tableEntry">
+        <h4>1</h4>
+        <h4>4:37</h4>
+        <h4>11/13</h4>
+        <h4>11/19</h4>
+        <h4 class="historyDelete">X</h4>
+      </div>
+    </div>
+  </div>
+  <div id="widescreen">
+    <p>To witness all this AWESOMENESS!</p>
+    <h1>ROTATE your device to PORTRAIT view.</h1>
+  </div>
+  <!-- JAVASCRIPT-->
+  <script src="js-main.js"></script>
+</body>
+
+</html>

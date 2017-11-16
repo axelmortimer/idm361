@@ -1,0 +1,232 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 16px;
+  background-color: #444444;
+  color: #f4f4f4;
+  font-family: 'Lato', sans-serif;
+}
+
+.wrapper, .homeWrapper, .historyWrapper {
+  width: 20rem;
+  margin: 0 auto;
+  padding: 0 32px;
+  -webkit-user-select: none;
+}
+
+.homeWrapper {
+  padding: 0 32px 0 28px;
+}
+
+.historyWrapper {
+  padding: 0 20px;
+}
+
+#widescreen {
+  width: 30rem;
+  margin: 5.3125rem auto;
+  text-align: center;
+  color: #ffffff;
+  -webkit-user-select: none;
+  display: none;
+}
+
+header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 9.5rem;
+  color: #f5bc2c;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  text-shadow: 3px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+.headerHours {
+  font-size: 7rem;
+  margin-top: -0.8rem;
+  margin-right: 1rem;
+  letter-spacing: -4px;
+}
+
+.headerText {
+  margin-top: 0.4rem;
+  font-size: 2rem;
+}
+
+.chart {
+  width: 100%;
+  height: 5.5rem;
+  margin-bottom: 0.3rem;
+  border: 2px solid #f5bc2c;
+  border-radius: 4px;
+}
+
+.chartContainer {
+  margin-bottom: 1.6rem;
+}
+
+.chartHeader {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+#startButton, #stopButton {
+  position: fixed;
+  font-size: 2rem;
+  height: 3.5rem;
+  width: 80vw;
+  margin: 0 10vw;
+  bottom: 2rem;
+  background-color: #f5bc2c;
+  box-shadow: 3px 3px 1px 0px rgb(0,0,0,0.4);
+  border: none;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.dailyHistoryButton {
+  background-color: #444444;
+  color: #f5bc2c;
+  border: none;
+}
+
+
+/* --- TIMER --- */
+
+#timer {
+  color: #f5bc2c;
+  text-shadow: 3px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+.timerContainer {
+  position: fixed;
+  width: 80vw;
+  margin: 0 10vw;
+  text-align: center;
+  top: 7rem;
+  line-height: 0.2;
+}
+
+  .timerContainer h1 {
+    font-size: 4rem;
+  }
+
+  .timerContainer p {
+    line-height: 1;
+    margin-top: 4rem;
+    padding: 0 2.6rem;
+  }
+
+
+/* --- HISTORY --- */
+
+.historyNav {
+  height: 4.5rem;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
+  border-bottom: 0.25rem solid #f5bc2c;
+  margin-bottom: 1.5rem;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  color: #f5bc2c;
+}
+
+  .historyNav * {
+    width: 37%;
+    text-align: center;
+  }
+
+  .historyNavDaily, .historyNavWeekly {
+    cursor: pointer;
+    font-size: 2rem;
+  }
+
+  .historyNav button {
+    width: 21%;
+    font-size: 2.5rem;
+    font-weight: 50;
+    background-color: #444444;
+    color: #f5bc2c;
+    border: none;
+    text-align: left;
+    padding-left: 1rem;
+  }
+
+.dailyEntryContainer {
+
+}
+
+.weeklyEntryContainer {
+  display: none;
+}
+
+.tableHeading {
+  opacity: 0.5;
+  width: 100%;
+  padding: 0 0.5rem 0 0;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tableEntry {
+  color: black;
+  background-color: lightgray;
+  height: 2rem;
+  width: 100%;
+  padding: 0 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.historyDelete {
+  cursor: pointer;
+}
+
+
+/* --- RESPONSIVE DESIGN --- */
+
+@media only screen and (min-width: 360px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (orientation:portrait) {
+  .homeWrapper {
+    display: block;
+  }
+  #startButton, #stopButton {
+    display: auto;
+  }
+  #widescreen {
+    display: none;
+  }
+}
+
+@media only screen and (orientation:landscape) {
+  .homeWrapper {
+    display: none;
+  }
+  #startButton, #stopButton {
+    display: none;
+  }
+  #widescreen {
+    display: block;
+  }
+}

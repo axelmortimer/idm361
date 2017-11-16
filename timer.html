@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Timer - Deep Work</title>
+  <!-- META -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width, maximum-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <!-- CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Lato|Yanone+Kaffeesatz" rel="stylesheet">
+  <link rel="stylesheet" href="css-normalize.css">
+  <link rel="stylesheet" href="css-main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <!-- PAGE CONTENT -->
+  <div id="wrapper">
+    <div class="timerContainer">
+      <h2>YOU'VE DONE</h2>
+      <h1 id="timer"><time>00:00:00</time></h1>
+      <h3>OF DEEP WORK</h3>
+      <p>If you leave the app for any reason, you’ll lose ALL of your Deep Work!<br><br>
+
+         Press <b>STOP</b> when you can’t focus anymore.</p>
+    </div>
+    <button type="button" name="stop_btn" id="stopButton" onclick="jmp2LocalPage('index.html')">STOP</button>
+  </div>
+  <div id="widescreen">
+    <p>To witness all this AWESOMENESS!</p>
+    <h1>ROTATE your device to PORTRAIT view.</h1>
+  </div>
+  <!-- JAVASCRIPT-->
+  <script src="js-main.js"></script>
+  <script>
+
+    var time = document.getElementById('timer'),
+        seconds = 0, minutes = 0, hours = 0, overallSeconds = 0,
+        t;
+
+    function timer() {
+        t = setTimeout(add, 1000);
+    }
+
+    function add() {
+        overallSeconds++;
+        seconds++;
+        if (seconds >= 60) {
+            seconds = 0;
+            minutes++;
+            if (minutes >= 60) {
+                minutes = 0;
+                hours++;
+            }
+        }
+
+        time.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+        timer();
+    }
+
+    timer();
+
+  </script>
+</body>
+
+</html>
