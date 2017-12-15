@@ -27,13 +27,27 @@ html {
 }
 
 #widescreen {
-  width: 30rem;
-  margin: 5.3125rem auto;
-  text-align: center;
-  color: #ffffff;
+  width: 80vw;
+  height: 100vh;
+  margin: 0 auto;
   -webkit-user-select: none;
   display: none;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
 }
+
+  #widescreen h1 {
+    width: 50%;
+    line-height: 100%;
+    text-align: center;
+    color: #f5bc2c;
+    text-shadow: 3px 3px 1px rgba(0, 0, 0, 0.3);
+  }
+
+  #widescreen img {
+    width: 30%;
+  }
 
 header {
   display: flex;
@@ -41,7 +55,7 @@ header {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 9.5rem;
+  height: 8rem;
   color: #f5bc2c;
   font-family: 'Yanone Kaffeesatz', sans-serif;
   text-shadow: 3px 3px 1px rgba(0, 0, 0, 0.3);
@@ -61,14 +75,15 @@ header {
 
 .chart {
   width: 100%;
-  height: 5.5rem;
+  height: 6.5rem;
   margin-bottom: 0.3rem;
   border: 2px solid #f5bc2c;
   border-radius: 4px;
+  overflow: hidden;
 }
 
 .chartContainer {
-  margin-bottom: 1.6rem;
+  margin-bottom: 1rem;
 }
 
 .chartHeader {
@@ -217,6 +232,9 @@ header {
   #widescreen {
     display: none;
   }
+  #timer {
+    display: auto;
+  }
 }
 
 @media only screen and (orientation:landscape) {
@@ -227,6 +245,9 @@ header {
     display: none;
   }
   #widescreen {
-    display: block;
+    display: flex;
+  }
+  #timer {
+    display: none;
   }
 }

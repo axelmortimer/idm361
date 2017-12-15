@@ -11,20 +11,26 @@
   <!-- CSS -->
   <link rel="stylesheet" href="css-normalize.css">
   <link rel="stylesheet" href="css-add2home.css">
+  <link rel="stylesheet" href="css-threesy.css">
   <link rel="stylesheet" href="css-main.css">
   <!-- iPhone ICON -->
-  <link rel="apple-touch-icon" href="img/icon-57x57.png" sizes="57x57">
-  <!-- iPhone ICON (Retina) -->
-  <link rel="apple-touch-icon" href="img/icon-114x114.png" sizes="114x114">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+  <link rel="manifest" href="img/manifest.json">
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <meta name="msapplication-config" content="img/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
   <link href="https://fonts.googleapis.com/css?family=Lato|Yanone+Kaffeesatz" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="jquery-3.2.1.min.js"></script>
+  <script src="js-threesy.js"></script>
 </head>
 
 <body>
   <!-- PAGE CONTENT -->
   <div class="homeWrapper">
     <header>
-      <div class="headerHours">0.0</div>
+      <div class="headerHours">1.2</div>
       <h2 class="headerText">HOURS OF<br>
                               DEEP WORK</h2>
     </header>
@@ -34,41 +40,26 @@
           <h3 class="chartTitle">DAILY</h3>
           <button type="button" name="start_btn" class="dailyHistoryButton" onclick="jmp2LocalPage('history.html')">more ></button>
         </div>
-        <div class="chart"></div>
-        <div class="chartFooter">Down 0.0 hours from yesterday!</div>
+        <div class="chart" id="chart-daily"></div>
+        <div class="chartFooter">Up 0.0 hours from yesterday!</div>
       </div>
       <div class="chartContainer">
         <div class="chartHeader">
           <h3 class="chartTitle">WEEKLY</h3>
           <button type="button" name="start_btn" class="dailyHistoryButton" onclick="jmp2LocalPage('history.html')">more ></button>
         </div>
-        <div class="chart"></div>
-        <div class="chartFooter">Down 0.0 hours from yesterday!</div>
+        <div class="chart" id="chart-weekly"></div>
+        <div class="chartFooter">Up 0.0 hours from yesterday!</div>
       </div>
     </main>
   </div>
   <button type="button" name="start_btn" id="startButton" onclick="jmp2LocalPage('timer.html')">START</button>
 
   <div id="widescreen">
-    <p>To witness all this AWESOMENESS!</p>
-    <h1>ROTATE your device to PORTRAIT view.</h1>
+    <h1>ROTATE YOUR DEVICE!</h1>
+    <img src="img/logo.png" alt="logo">
   </div>
-  <!-- <div id="wrapper">
-    <button type="button" name="about_btn" id="about_btn" onclick="jmp2LocalPage('about.html')">About</button>
-    <div id="display">
-      <div id="result">
-      </div>
-    </div>
-    <form oninput="hm_result.value=parseInt(howmany.value)">
-      <div id="wgf">
-        <button type="button" name="wgf_btn" id="wgf_btn" onclick="pickSomeOne()">Who Goes First?</button>
-      </div>
-      <div id="gather">
-        2 <input type="range" name="howmany" id="howmany" min="2" max="20" value="2"> 20
-        <input type="text" name="hm_result" id="hm_result" value="2" disabled>
-      </div>
-    </form>
-  </div> -->
+
   <!-- JAVASCRIPT-->
   <script src="js-refresh-manifest.js" type="text/javascript"></script>
   <script type="text/javascript">
@@ -80,6 +71,6 @@
   </script>
   <script src="js-add2home.js"></script>
   <script src="js-main.js"></script>
+  <script src="js-index.js"></script>
 </body>
-
 </html>

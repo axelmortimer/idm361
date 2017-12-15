@@ -1,0 +1,32 @@
+.threesy-line {
+  stroke: #f5bc2c;
+  stroke-width: 1px; }
+
+.threesy-line path.line {
+  fill: none;
+  stroke: #f5bc2c;
+  stroke-width: 2px; }
+
+.threesy-line .threesy-data-point {
+  fill: #FFF;
+  stroke: #f5bc2c;
+  stroke-width: 2; }
+  .threesy-line .threesy-data-point:hover {
+    stroke-width: 4; }
+
+.threesy-line .threesy-grid-line {
+  stroke: #f5bc2c;
+  stroke-width: 1px;
+  opacity: 0.5; }
+
+.threesy-line .tick line {
+  stroke: #f5bc2c;
+}
+
+.threesy-line .x .domain {
+  stroke: #f5bc2c !important;
+}
+
+.threesy-line .y .domain {
+  stroke: #f5bc2c !important;
+}

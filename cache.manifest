@@ -1,27 +1,47 @@
 CACHE MANIFEST
-# version - 09
+# version - 11
 
 CACHE:
 
 # CSS
-css-add2home.css
-css-main.css
 css-normalize.css
+css-add2home.css
+css-threesy.css
+css-main.css
 
 # IMAGES
-img/face_frown.svg
-img/face_smile.png
-img/face_smile.svg
-img/icon-57x57.png
-img/icon-114x114.png
+img/android-chrome-192x192.png
+img/android-chrome-512x512.png
+img/apple-touch-icon-57x57.png
+img/apple-touch-icon-60x60.png
+img/apple-touch-icon-72x72.png
+img/apple-touch-icon-76x76.png
+img/apple-touch-icon-114x114.png
+img/apple-touch-icon-120x120.png
+img/apple-touch-icon-144x144.png
+img/apple-touch-icon-152x152.png
+img/apple-touch-icon-180x180.png
+img/apple-touch-icon.png
+img/browserconfig.xml
+img/favicon-16x16.png
+img/favicon-32x32.png
+img/favicon.ico
+img/logo.png
+img/manifest.json
+img/mstile-150x150.png
 
 # HTML FILES
 index.html
-about.html
+history.html
+timer.html
 
 # JAVASCRIPT - SPECIFIC ORDER
+jquery-3.2.1.min.js
+js-threesy.js
 js-refresh-manifest.js
 js-add2home.js
+js-index.js
+js-timer.js
 js-main.js
 
 ## Any resources not listed above will require the user to be online.
