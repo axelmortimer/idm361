@@ -4,18 +4,29 @@ var dailyMinutes = 0;
 var dailyHours = 0.0;
 var dailySecondsArray = [];
 var dailySecondsArrayTemp = [];
-var today = new Date();
+var today = new Date(new Date().setHours(0, 0, 0, 0));
 var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
 var yyyy = today.getFullYear();
 
-if(dd<10){
-    dd='0'+dd;
+
+function simplifyDate(longDate) {
+  var day = longDate.getDate()
+  var month = longDate.getMonth()+1;
+  var year = longDate.getFullYear();
+
+  if (day < 10) {
+      day = '0' + day;
+  }
+  if (month < 10) {
+      month = '0' + month;
+  }
+  var shortDate = month + '/' + day;
+  return shortDate;
 }
-if(mm<10){
-    mm='0'+mm;
-}
-var todayDate = mm+'/'+dd;
+
+var todayDate = simplifyDate(today);
+
 // Test Dates:
 // todayDate = '12/16';
 
@@ -23,19 +34,26 @@ var todayDate = mm+'/'+dd;
 if (typeof (Storage) !== "undefined") {
 
   // Reset localStorage.dailySecondsArray for debugging
-  // localStorage.removeItem('dailySecondsArray');
+  localStorage.removeItem('dailySecondsArray');
 
   // Sync LocalStorage to JS Variables
   if (localStorage.dailySecondsArray) {
     console.log('DailySecondsArray already exists.');
     console.log('localStorage.dailySecondsArray: ', JSON.parse(localStorage.dailySecondsArray));
 
+
     // Compare Dates
     dailySecondsArrayTemp = JSON.parse(localStorage.dailySecondsArray);
-    if (dailySecondsArrayTemp[0][0] !== todayDate) {
+    if (dailySecondsArrayTemp[0][0] !== today) {
+      var yesterday = new Date(new Date().setHours(0, 0, 0, 0));
+      yesterday.setDate(yesterday.getDate() - 1);
+      console.log('yesterday: ', yesterday);
+      // if (dailySecondsArrayTemp[0][0] !== ) {
+      //
+      // }
       // Add date to beginning of array
       console.log('New day!');
-      dailySecondsArrayTemp.unshift([todayDate, 0, 0]);
+      dailySecondsArrayTemp.unshift([today, todayDate, 0, 0]);
       console.log('dailySecondsArrayTemp: ', dailySecondsArrayTemp);
       localStorage.dailySecondsArray = JSON.stringify(dailySecondsArrayTemp);
     } else {
@@ -45,7 +63,7 @@ if (typeof (Storage) !== "undefined") {
   } else {
     // Create Local Storage Daily Array If It Doesn't Exist
     console.log('DailySecondsArray doesn\'t exist, creating new array.');
-    localStorage.dailySecondsArray = JSON.stringify([[todayDate, 0, 0]]);
+    localStorage.dailySecondsArray = JSON.stringify([[today, todayDate, 0, 0]]);
   }
 
   // Match arrays
@@ -57,9 +75,6 @@ if (typeof (Storage) !== "undefined") {
   alert('This browser does NOT support local storage');
 }
 
-// Edit Total Hours
-document.getElementById('totalHours').innerHTML = JSON.stringify(dailySecondsArray[0][1]);
-
 // Change Page
 function jmp2LocalPage(whichPage) {
   location.href = whichPage;
@@ -69,8 +84,8 @@ function jmp2LocalPage(whichPage) {
 function saveTime() {
   console.log("saveTime called");
   if (typeof (Storage) !== "undefined") {
-    dailySecondsArray[0][2] = (dailySecondsArray[0][2] || 0) + overallSeconds;
-    dailySecondsArray[0][1] = computeHours(dailySecondsArray[0][2]);
+    dailySecondsArray[0][3] = (dailySecondsArray[0][3] || 0) + overallSeconds;
+    dailySecondsArray[0][2] = computeHours(dailySecondsArray[0][3]);
     localStorage.dailySecondsArray = JSON.stringify(dailySecondsArray);
   } else {
     // Sorry! No Web Storage support..

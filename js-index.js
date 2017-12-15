@@ -1,13 +1,17 @@
+// Edit Total Hours
+document.getElementById('totalHours').innerHTML = JSON.stringify(dailySecondsArray[0][2]);
+
+// Convert pixel to REMs for chart width/height
 var fontSize = window.getComputedStyle(document.body).getPropertyValue('font-size');
 fontSize = fontSize.slice(0,2);
-var todayDateNumber = 0;
 
-var dailySecondsChart = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
-dailySecondsChart[6][0] = todayDate;
-dailySecondsChart[6][1] = dailySecondsArray[0][1];
 
-todayDateNumber = parseInt(dailySecondsChart[6][0].replace('/', ''));
-console.log(todayDateNumber);
+// var dailySecondsChart = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
+// dailySecondsChart[6][0] = todayDate;
+// dailySecondsChart[6][1] = dailySecondsArray[0][1];
+//
+// todayDateNumber = parseInt(dailySecondsChart[6][0].replace('/', ''));
+
 
 
 var linechartDaily = new ThreesyLine({
