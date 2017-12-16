@@ -5,6 +5,28 @@ if (JSON.parse(dailySecondsArray[0][2]) !== 0) {
   document.getElementById('totalHours').innerHTML = '0.0';
 }
 
+// Track time change
+var dailyChange = 0;
+var weeklyChange = 0;
+
+dailyChange = dailySecondsArray[0][2] - dailySecondsArray[1][2];
+if (dailyChange > 0.0) {
+  dailyChange = '+' + Math.abs(dailyChange);
+} else {
+  dailyChange = '-' + Math.abs(dailyChange);
+}
+
+weeklyChange = weeklySecondsArray[0][2] - weeklySecondsArray[1][2];
+if (weeklyChange > 0.0) {
+  weeklyChange = '+' + Math.abs(weeklyChange);
+} else {
+  weeklyChange = '-' + Math.abs(weeklyChange);
+}
+
+document.getElementById('dailyDifference').innerHTML = dailyChange;
+document.getElementById('weeklyDifference').innerHTML = weeklyChange;
+
+
 // Convert pixel to REMs for chart width/height
 var fontSize = window.getComputedStyle(document.body).getPropertyValue('font-size');
 fontSize = fontSize.slice(0,2);
@@ -24,8 +46,6 @@ var linechartDaily = new ThreesyLine({
     ]
 });
 linechartDaily.draw();
-
-
 
 var linechartWeekly = new ThreesyLine({
     element: "#chart-weekly",

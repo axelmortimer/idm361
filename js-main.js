@@ -16,6 +16,8 @@ var diffDays;
 var oneDay = 24*60*60*1000;
 var incrementWeek;
 var decrementWeek;
+var dailyChange = 0;
+var weeklyChange = 0;
 var today = new Date(new Date().setHours(0, 0, 0, 0));
 var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
@@ -114,7 +116,7 @@ if (typeof (Storage) !== "undefined") {
 
   } else {
 
-    console.log('DailySecondsArray already exists.');
+    console.log('weeklySecondsArray already exists.');
 
     // Compare weeks
     weeklySecondsArrayTemp = JSON.parse(localStorage.weeklySecondsArray);
@@ -144,9 +146,7 @@ if (typeof (Storage) !== "undefined") {
       weekMonday.setDate(today.getDate() - (today.getDay() + 6) % 7);
       incrementWeek = new Date(today);
       var diffDays = Math.round(Math.abs((incrementWeek.getTime() - weekMonday.getTime())/(oneDay)));
-      console.log(diffDays);
       weeklySeconds = 0;
-      console.log(dailySecondsArrayTemp);
       while (diffDays > 0) {
         weeklySeconds = weeklySeconds + dailySecondsArrayTemp[diffDays - 1][3];
         diffDays--;
@@ -162,7 +162,6 @@ if (typeof (Storage) !== "undefined") {
   decrementWeek = new Date(weeklySecondsArrayTemp[weeklySecondsArrayTemp.length - 1][0]);
   decrementWeek.setDate(decrementWeek.getDate() - (decrementWeek.getDay() + 6) % 7);
   while (weeklySecondsArrayTemp.length < 7) {
-    console.log('hit');
     decrementWeek.setDate(decrementWeek.getDate() - 7);
     weeklySecondsArrayTemp.push([new Date(decrementWeek), simplifyDate(decrementWeek), 0, 0]);
   }
@@ -170,7 +169,7 @@ if (typeof (Storage) !== "undefined") {
 
   // Match arrays
   weeklySecondsArray = JSON.parse(localStorage.weeklySecondsArray);
-  console.log(weeklySecondsArray);
+  console.log('WEEKLY: ', weeklySecondsArray);
 
 } else {
   // Sorry! No Web Storage support..
@@ -215,8 +214,5 @@ $(document).ready(function() {
     $('.historyNavWeekly').bind('touchstart click', function() {
       $('.dailyEntryContainer').css('display', 'none');
       $('.weeklyEntryContainer').css('display', 'inline');
-    });
-    $('.historyDelete').bind('touchstart click', function() {
-      $(this).parent().css('display', 'none');
     });
 });
