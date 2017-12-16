@@ -4,9 +4,9 @@ var dailyMinutes = 0;
 var dailyHours = 0.0;
 var dailySecondsArray = [];
 var dailySecondsArrayTemp = [];
-var lastDate;
 var yesterday;
 var incrementDay;
+var decrementDay;
 var today = new Date(new Date().setHours(0, 0, 0, 0));
 var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
@@ -14,7 +14,7 @@ var yyyy = today.getFullYear();
 
 
 function simplifyDate(longDate) {
-  var day = longDate.getDate()
+  var day = longDate.getDate();
   var month = longDate.getMonth()+1;
   var year = longDate.getFullYear();
 
@@ -32,7 +32,7 @@ var todayDate = simplifyDate(today);
 
 // Test Dates:
 // todayDate = '12/18';
-// today.setDate(yesterday.getDate() + 3);
+// today.setDate(today.getDate() + 3);
 
 // Instantiate/Populate Daily Seconds Array
 if (typeof (Storage) !== "undefined") {
@@ -50,30 +50,26 @@ if (typeof (Storage) !== "undefined") {
   } else {
 
     console.log('DailySecondsArray already exists.');
-    console.log('localStorage.dailySecondsArray: ', JSON.parse(localStorage.dailySecondsArray));
 
     // Compare Dates
     dailySecondsArrayTemp = JSON.parse(localStorage.dailySecondsArray);
-    lastDate = new Date(dailySecondsArrayTemp[0][0]);
-    if (lastDate !== today) {
-      // Find yesterday's date
-      yesterday = new Date(new Date().setHours(0, 0, 0, 0));
-      yesterday.setDate(yesterday.getDate() - 1);
-      console.log('yesterday: ', yesterday);
-      incrementDay = new Date(lastDate);
-      console.log(incrementDay);
+    dailySecondsArrayTemp[0][0] = new Date(dailySecondsArrayTemp[0][0]);
 
-      // If user skipped a day, populate with missing days
-      // while (lastDate !== yesterday) {
-      //
-      //   incrementDay.setDate(incrementDay.getDate() - 1);
-      //   dailySecondsArrayTemp.unshift([incrementDay, simplifyDate(incrementDay), 0.0, 0]);
-      // }
+    // Test Date
+    // dailySecondsArrayTemp[0][0].setDate(dailySecondsArrayTemp[0][0].getDate() - 3);
 
-      // Add new date to front of array
+    if (dailySecondsArrayTemp[0][0].getTime() !== today.getTime()) {
       console.log('New day!');
-      dailySecondsArrayTemp.unshift([today, todayDate, 0.0, 0]);
-      console.log('dailySecondsArrayTemp: ', dailySecondsArrayTemp);
+      incrementDay = new Date(dailySecondsArrayTemp[0][0]);
+
+      // Populate with missing days
+      while (incrementDay.getTime() !== today.getTime()) {
+        incrementDay.setDate(incrementDay.getDate() + 1);
+        console.log(incrementDay);
+        dailySecondsArrayTemp.unshift([new Date(incrementDay), simplifyDate(incrementDay), 0.0, 0]);
+      }
+
+      console.log(dailySecondsArrayTemp);
       localStorage.dailySecondsArray = JSON.stringify(dailySecondsArrayTemp);
 
     } else {
@@ -81,9 +77,19 @@ if (typeof (Storage) !== "undefined") {
     }
   }
 
+  // Populate with more dates if length isn't 7
+  dailySecondsArrayTemp = JSON.parse(localStorage.dailySecondsArray);
+  dailySecondsArrayTemp[dailySecondsArrayTemp.length - 1][0] = new Date(dailySecondsArrayTemp[dailySecondsArrayTemp.length - 1][0]);
+  while (dailySecondsArrayTemp.length < 7) {
+    decrementDay = new Date(dailySecondsArrayTemp[dailySecondsArrayTemp.length - 1][0]);
+    decrementDay.setDate(decrementDay.getDate() - 1);
+    dailySecondsArrayTemp.push([new Date(decrementDay), simplifyDate(decrementDay), 0.0, 0]);
+  }
+  localStorage.dailySecondsArray = JSON.stringify(dailySecondsArrayTemp);
+
   // Match arrays
   dailySecondsArray = JSON.parse(localStorage.dailySecondsArray);
-  console.log('dailySecondsArray: ', dailySecondsArray);
+  console.log(dailySecondsArray);
 
 } else {
   // Sorry! No Web Storage support..
@@ -114,8 +120,6 @@ function computeHours(seconds) {
   dailyMinutes = seconds / 60;
   dailyHours = dailyMinutes / 60;
   dailyHours = Math.round(dailyHours * 10) / 10;
-  console.log('dailyMinutes: ', dailyMinutes);
-  console.log('dailyHours: ', dailyHours);
   return dailyHours;
 }
 
