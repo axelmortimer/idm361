@@ -1,5 +1,10 @@
 // Edit Total Hours
-document.getElementById('totalHours').innerHTML = JSON.stringify(dailySecondsArray[0][2]);
+if (JSON.parse(dailySecondsArray[0][2]) !== 0) {
+  document.getElementById('totalHours').innerHTML = JSON.parse(dailySecondsArray[0][2]);
+} else {
+  document.getElementById('totalHours').innerHTML = '0.0';
+}
+
 
 // Convert pixel to REMs for chart width/height
 var fontSize = window.getComputedStyle(document.body).getPropertyValue('font-size');
