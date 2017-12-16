@@ -1,12 +1,21 @@
 var historyTab = 0;
 var dailySeconds = 0;
 var dailyMinutes = 0;
-var dailyHours = 0.0;
+var dailyHours = 0;
 var dailySecondsArray = [];
 var dailySecondsArrayTemp = [];
 var yesterday;
 var incrementDay;
 var decrementDay;
+var weeklySeconds = 0;
+var weeklySecondsArray = [];
+var weeklySecondsArrayTemp = [];
+var weekMonday;
+var nextMonday;
+var diffDays;
+var oneDay = 24*60*60*1000;
+var incrementWeek;
+var decrementWeek;
 var today = new Date(new Date().setHours(0, 0, 0, 0));
 var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
@@ -37,15 +46,16 @@ var todayDate = simplifyDate(today);
 // Instantiate/Populate Daily Seconds Array
 if (typeof (Storage) !== "undefined") {
 
-  // Reset localStorage.dailySecondsArray for debugging
+  // Reset localStorage.dailySecondsArray and localStorage.weeklySecondsArray for debugging
   // localStorage.removeItem('dailySecondsArray');
+  // localStorage.removeItem('weeklySecondsArray');
 
   // Sync LocalStorage to JS Variables
   if (!localStorage.dailySecondsArray) {
 
     // Create Local Storage Daily Array If It Doesn't Exist
     console.log('DailySecondsArray doesn\'t exist, creating new array.');
-    localStorage.dailySecondsArray = JSON.stringify([[today, todayDate, 0.0, 0]]);
+    localStorage.dailySecondsArray = JSON.stringify([[today, todayDate, 0, 0]]);
 
   } else {
 
@@ -66,7 +76,7 @@ if (typeof (Storage) !== "undefined") {
       while (incrementDay.getTime() !== today.getTime()) {
         incrementDay.setDate(incrementDay.getDate() + 1);
         console.log(incrementDay);
-        dailySecondsArrayTemp.unshift([new Date(incrementDay), simplifyDate(incrementDay), 0.0, 0]);
+        dailySecondsArrayTemp.unshift([new Date(incrementDay), simplifyDate(incrementDay), 0, 0]);
       }
 
       console.log(dailySecondsArrayTemp);
@@ -83,13 +93,84 @@ if (typeof (Storage) !== "undefined") {
   while (dailySecondsArrayTemp.length < 7) {
     decrementDay = new Date(dailySecondsArrayTemp[dailySecondsArrayTemp.length - 1][0]);
     decrementDay.setDate(decrementDay.getDate() - 1);
-    dailySecondsArrayTemp.push([new Date(decrementDay), simplifyDate(decrementDay), 0.0, 0]);
+    dailySecondsArrayTemp.push([new Date(decrementDay), simplifyDate(decrementDay), 0, 0]);
   }
   localStorage.dailySecondsArray = JSON.stringify(dailySecondsArrayTemp);
 
   // Match arrays
   dailySecondsArray = JSON.parse(localStorage.dailySecondsArray);
-  console.log(dailySecondsArray);
+  console.log('DAILY: ', dailySecondsArray);
+
+
+  // Instantiate Weekly Seconds array
+  if (!localStorage.weeklySecondsArray) {
+
+    // Create Local Storage Daily Array If It Doesn't Exist
+    console.log('weeklySecondsArray doesn\'t exist, creating new array.');
+    dailySecondsArrayTemp = JSON.parse(localStorage.dailySecondsArray);
+    weekMonday = new Date(dailySecondsArrayTemp[0][0]);
+    weekMonday.setDate(weekMonday.getDate() - (weekMonday.getDay() + 6) % 7);
+    localStorage.weeklySecondsArray = JSON.stringify([[weekMonday, simplifyDate(weekMonday), 0, 0]]);
+
+  } else {
+
+    console.log('DailySecondsArray already exists.');
+
+    // Compare weeks
+    weeklySecondsArrayTemp = JSON.parse(localStorage.weeklySecondsArray);
+    dailySecondsArrayTemp = JSON.parse(localStorage.dailySecondsArray);
+    weekMonday = new Date(dailySecondsArrayTemp[0][0]);
+    weekMonday.setDate(today.getDate() - (today.getDay() + 6) % 7);
+    nextMonday = new Date(weekMonday);
+    nextMonday.setDate(nextMonday.getDate() + 7);
+
+    if (today.getTime() >= nextMonday.getTime()) {
+      console.log('New week!');
+      weekMonday.setDate(today.getDate() - (today.getDay() + 6) % 7);
+      nextMonday.setDate(nextMonday.getDate() + 7);
+      incrementWeek = new Date(today);
+      var diffDays = Math.round(Math.abs((incrementWeek.getTime() - weekMonday.getTime())/(oneDay)));
+      console.log(diffDays);
+      while (diffDays > 0) {
+        diffDays--;
+        weeklySeconds = weeklySeconds + dailySecondsArrayTemp[diffDays-1][3];
+      }
+      weeklySecondsArrayTemp.unshift([weekMonday, simplifyDate(weekMonday), computeHours(weeklySeconds), weeklySeconds]);
+
+      localStorage.weeklySecondsArray = JSON.stringify(weeklySecondsArrayTemp);
+
+    } else {
+      console.log('Same week!');
+      weekMonday.setDate(today.getDate() - (today.getDay() + 6) % 7);
+      incrementWeek = new Date(today);
+      var diffDays = Math.round(Math.abs((incrementWeek.getTime() - weekMonday.getTime())/(oneDay)));
+      console.log(diffDays);
+      weeklySeconds = 0;
+      console.log(dailySecondsArrayTemp);
+      while (diffDays > 0) {
+        weeklySeconds = weeklySeconds + dailySecondsArrayTemp[diffDays - 1][3];
+        diffDays--;
+      }
+      weeklySecondsArrayTemp[0] = ([weekMonday, simplifyDate(weekMonday), computeHours(weeklySeconds), weeklySeconds]);
+
+      localStorage.weeklySecondsArray = JSON.stringify(weeklySecondsArrayTemp);
+    }
+  }
+
+  // Populate weeklyArray with more dates if length isn't 7
+  weeklySecondsArrayTemp = JSON.parse(localStorage.weeklySecondsArray);
+  decrementWeek = new Date(weeklySecondsArrayTemp[weeklySecondsArrayTemp.length - 1][0]);
+  decrementWeek.setDate(decrementWeek.getDate() - (decrementWeek.getDay() + 6) % 7);
+  while (weeklySecondsArrayTemp.length < 7) {
+    console.log('hit');
+    decrementWeek.setDate(decrementWeek.getDate() - 7);
+    weeklySecondsArrayTemp.push([new Date(decrementWeek), simplifyDate(decrementWeek), 0, 0]);
+  }
+  localStorage.weeklySecondsArray = JSON.stringify(weeklySecondsArrayTemp);
+
+  // Match arrays
+  weeklySecondsArray = JSON.parse(localStorage.weeklySecondsArray);
+  console.log(weeklySecondsArray);
 
 } else {
   // Sorry! No Web Storage support..

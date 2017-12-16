@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# version - 11
+# version - 12
 
 CACHE:
 
@@ -42,6 +42,7 @@ js-refresh-manifest.js
 js-add2home.js
 js-index.js
 js-timer.js
+js-history.js
 js-main.js
 
 ## Any resources not listed above will require the user to be online.

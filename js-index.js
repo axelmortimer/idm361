@@ -5,16 +5,14 @@ if (JSON.parse(dailySecondsArray[0][2]) !== 0) {
   document.getElementById('totalHours').innerHTML = '0.0';
 }
 
-
 // Convert pixel to REMs for chart width/height
 var fontSize = window.getComputedStyle(document.body).getPropertyValue('font-size');
 fontSize = fontSize.slice(0,2);
 
-
 var linechartDaily = new ThreesyLine({
     element: "#chart-daily",
     height: 6.6875*fontSize,
-    width: 16.25*fontSize,
+    width: 15.75*fontSize,
     data: [
         {x: dailySecondsArray[6][1], y: dailySecondsArray[6][2]},
         {x: dailySecondsArray[5][1], y: dailySecondsArray[5][2]},
@@ -27,18 +25,20 @@ var linechartDaily = new ThreesyLine({
 });
 linechartDaily.draw();
 
+
+
 var linechartWeekly = new ThreesyLine({
     element: "#chart-weekly",
     height: 6.6875*fontSize,
-    width: 16.25*fontSize,
+    width: 15.75*fontSize,
     data: [
-        {x: "12/4", y: 0},
-        {x: "12/11", y: 0},
-        {x: "12/18", y: 0},
-        {x: "12/25", y: 0},
-        {x: "1/2", y: 0},
-        {x: "1/9", y: 0},
-        {x: "1/16", y: 0}
+        {x: weeklySecondsArray[6][1], y: weeklySecondsArray[6][2]},
+        {x: weeklySecondsArray[5][1], y: weeklySecondsArray[5][2]},
+        {x: weeklySecondsArray[4][1], y: weeklySecondsArray[4][2]},
+        {x: weeklySecondsArray[3][1], y: weeklySecondsArray[3][2]},
+        {x: weeklySecondsArray[2][1], y: weeklySecondsArray[2][2]},
+        {x: weeklySecondsArray[1][1], y: weeklySecondsArray[1][2]},
+        {x: weeklySecondsArray[0][1], y: weeklySecondsArray[0][2]}
     ]
 });
 linechartWeekly.draw();
