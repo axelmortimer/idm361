@@ -208,11 +208,11 @@ function computeHours(seconds) {
 $(document).ready(function() {
     //Switch between
     $('.historyNavDaily').bind('touchstart click', function() {
-      $('.dailyEntryContainer').css('display', 'inline');
-      $('.weeklyEntryContainer').css('display', 'none');
+      $('#dailyEntryContainer').css('display', 'inline');
+      $('#weeklyEntryContainer').css('display', 'none');
     });
     $('.historyNavWeekly').bind('touchstart click', function() {
-      $('.dailyEntryContainer').css('display', 'none');
-      $('.weeklyEntryContainer').css('display', 'inline');
+      $('#dailyEntryContainer').css('display', 'none');
+      $('#weeklyEntryContainer').css('display', 'inline');
     });
 });

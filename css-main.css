@@ -176,11 +176,11 @@ header {
     padding-left: 1rem;
   }
 
-.dailyEntryContainer {
+#dailyEntryContainer {
 
 }
 
-.weeklyEntryContainer {
+#weeklyEntryContainer {
   display: none;
 }
 
@@ -198,6 +198,7 @@ header {
   background-color: lightgray;
   height: 2rem;
   width: 100%;
+  margin-bottom: 0.75rem;
   padding: 0 0.5rem;
   display: flex;
   justify-content: space-between;
