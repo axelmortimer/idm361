@@ -1,7 +1,23 @@
 CACHE MANIFEST
-# version - 12
+# version - 13
 
 CACHE:
+
+# FONTS
+fonts/Lato-Black.ttf
+fonts/Lato-BlackItalic.ttf
+fonts/Lato-Bold.ttf
+fonts/Lato-BoldItalic.ttf
+fonts/Lato-Hairline.ttf
+fonts/Lato-HairlineItalic.ttf
+fonts/Lato-Italic.ttf
+fonts/Lato-Light.ttf
+fonts/Lato-LightItalic.ttf
+fonts/Lato-Regular.ttf
+fonts/YanoneKaffeesatz-Bold.ttf
+fonts/YanoneKaffeesatz-ExtraLight.ttf
+fonts/YanoneKaffeesatz-Light.ttf
+fonts/YanoneKaffeesatz-Regular.ttf
 
 # CSS
 css-normalize.css
@@ -40,10 +56,10 @@ jquery-3.2.1.min.js
 js-threesy.js
 js-refresh-manifest.js
 js-add2home.js
+js-main.js
 js-index.js
 js-timer.js
 js-history.js
-js-main.js
 
 ## Any resources not listed above will require the user to be online.
 NETWORK:

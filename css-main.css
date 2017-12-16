@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Yanone Kaffeesatz';
+  src: url('fonts/YanoneKaffeesatz-Regular.ttf');
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

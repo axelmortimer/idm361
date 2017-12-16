@@ -10,14 +10,14 @@ var dailyChange = 0;
 var weeklyChange = 0;
 
 dailyChange = dailySecondsArray[0][2] - dailySecondsArray[1][2];
-if (dailyChange > 0.0) {
+if (dailyChange >= 0.0) {
   dailyChange = '+' + Math.abs(dailyChange);
 } else {
   dailyChange = '-' + Math.abs(dailyChange);
 }
 
 weeklyChange = weeklySecondsArray[0][2] - weeklySecondsArray[1][2];
-if (weeklyChange > 0.0) {
+if (weeklyChange >= 0.0) {
   weeklyChange = '+' + Math.abs(weeklyChange);
 } else {
   weeklyChange = '-' + Math.abs(weeklyChange);
